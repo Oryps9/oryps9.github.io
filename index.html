@@ -14,7 +14,7 @@
     .fase { display: none; }
     .fase.active { display: block; }
     .upload { margin-top: 10px; }
-    .descripcion { width: 100%; background: #222; color: #eee; border: 1px solid #444; padding: 10px; margin-top: 10px; min-height: 100px; }
+    .descripcion { width: 100%; background: #222; color: #eee; border: 1px solid #444; padding: 10px; margin-top: 10px; min-height: 100px; white-space: pre-wrap; }
     .archivo-item { margin-top: 5px; background: #222; padding: 5px; border-radius: 4px; }
     a.download-link { color: #6cf; text-decoration: none; }
     #mapa { margin-top: 30px; background: #222; padding: 20px; border-radius: 8px; text-align: center; }
@@ -51,22 +51,19 @@
         "Habitación","Baño 2","Pasillo","Final"
       ];
       const descripciones = [
-        "Bienvenido a la Iglesia. Aquí comienza tu aventura. Carta:
-Acertijo: Oscuridad, órganos, almas, cuerpos; muertos... Casi parece un holocausto... Y aun así; es todo lo contrario. ¿Qué es? Donde su creador yace eternamente habrás de comenzar tu búsqueda.",
-        "Llegaste a la Plaza. Observa bien a tu alrededor. Dos calles en la esquina izquierda de esta plaza son vuestras opciones. Elegid bien, pues el camino de la mitra será el camino de luz. Tras ello, en un palacio encontraréis vuestra siguiente pista. (P. D.: Nadie ha dicho que el palacio parezca un palacio.)",
-        "El Palacio guarda secretos antiguos. '[...] al lado de un tipo de la misma _________ que al que habéis "usurpado un código QR".'
-
-¿A dónde tendréis que ir...?",
-        "¡Oh! ¡Aquella tan aclamada técnica con la que retratan con tanta belleza los pintores a sus modelos! ¿Cómo se llamaba?",
-        "La puerta.",
-        "La sala de invitados está vacía pero escucha sonidos extraños.",
-        "El Porche es estrecho y oscuro.",
-        "Cocina una pizza. Letra 1 y hacha. Receta. Y UV en el horno.",
-        "Baño 1, cuidado con lo que encuentres.",
-        "Habitación con muebles antiguos y pistas ocultas.",
-        "Baño 2, no hay nadie pero algo llama tu atención.",
-        " Que no te atrape la marioneta. ",
-        "Final: ¿Amigo?"
+        `Bienvenido a la Iglesia. Aquí comienza tu aventura. Carta:\nAcertijo: Oscuridad, órganos, almas, cuerpos; muertos... Casi parece un holocausto... Y aun así; es todo lo contrario. ¿Qué es? Donde su creador yace eternamente habrás de comenzar tu búsqueda.`,
+        `Llegaste a la Plaza. Observa bien a tu alrededor. Dos calles en la esquina izquierda de esta plaza son vuestras opciones. Elegid bien, pues el camino de la mitra será el camino de luz. Tras ello, en un palacio encontraréis vuestra siguiente pista. (P. D.: Nadie ha dicho que el palacio parezca un palacio.)`,
+        `El Palacio guarda secretos antiguos. '[...] al lado de un tipo de la misma _________ que al que habéis "usurpado un código QR".'\n\n¿A dónde tendréis que ir...?`,
+        `¡Oh! ¡Aquella tan aclamada técnica con la que retratan con tanta belleza los pintores a sus modelos! ¿Cómo se llamaba?`,
+        `La puerta.`,
+        `La sala de invitados está vacía pero escucha sonidos extraños.`,
+        `El Porche es estrecho y oscuro.`,
+        `Cocina una pizza. Letra 1 y hacha. Receta. Y UV en el horno.`,
+        `Baño 1, cuidado con lo que encuentres.`,
+        `Habitación con muebles antiguos y pistas ocultas.`,
+        `Baño 2, no hay nadie pero algo llama tu atención.`,
+        `Que no te atrape la marioneta.`,
+        `Final: ¿Amigo?`
       ];
       for (let i = 1; i <= 13; i++) {
         document.write(`
@@ -135,3 +132,4 @@ Acertijo: Oscuridad, órganos, almas, cuerpos; muertos... Casi parece un holocau
   </script>
 </body>
 </html>
+
