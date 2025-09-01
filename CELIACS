@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Scorched Cranberries Association for the Investigation of Legally Evaded Cases</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #eee;
+      display: flex;
+    }
+    #sidebar {
+      width: 260px;
+      background-color: #000;
+      padding: 20px;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      overflow-y: auto;
+    }
+    #sidebar h2 {
+      color: #e63946;
+      text-align: center;
+      font-size: 16px;
+    }
+    #sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    #sidebar li {
+      margin: 10px 0;
+      cursor: pointer;
+      color: #ccc;
+    }
+    #sidebar li:hover {
+      color: #fff;
+    }
+    #content {
+      margin-left: 280px;
+      padding: 20px;
+      flex: 1;
+    }
+    .fase {
+      display: none;
+    }
+    .fase.active {
+      display: block;
+    }
+    .upload {
+      margin-top: 10px;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      background: #222;
+      color: #eee;
+      border: 1px solid #444;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    .archivo-item {
+      margin-top: 5px;
+      background: #222;
+      padding: 5px;
+      border-radius: 4px;
+    }
+    a.download-link {
+      color: #6cf;
+      text-decoration: none;
+    }
+    #mapa {
+      margin-top: 30px;
+      background: #222;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+    .map-point {
+      fill: #e63946;
+      cursor: pointer;
+    }
+    .map-label {
+      fill: #eee;
+      font-size: 12px;
+      text-anchor: middle;
+    }
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+    <h2>Scorched Cranberries Association for the Investigation of Legally Evaded Cases</h2>
+    <ul>
+      <li onclick="showPhase('fase1')">Fase 1: Iglesia</li>
+      <li onclick="showPhase('fase2')">Fase 2: Plaza</li>
+      <li onclick="showPhase('fase3')">Fase 3: Palacio</li>
+      <li onclick="showPhase('fase4')">Fase 4: Colegio</li>
+      <li onclick="showPhase('fase5')">Fase 5: Parque</li>
+      <li onclick="showPhase('fase6')">Fase 6: Patio</li>
+      <li onclick="showPhase('fase7')">Fase 7: Porche</li>
+      <li onclick="showPhase('fase8')">Fase 8: Cocina</li>
+      <li onclick="showPhase('fase9')">Fase 9: Baño 1</li>
+      <li onclick="showPhase('fase10')">Fase 10: Habitación</li>
+      <li onclick="showPhase('fase11')">Fase 11: Baño 2</li>
+      <li onclick="showPhase('fase12')">Fase 12: Pasillo</li>
+      <li onclick="showPhase('fase13')">Fase 13: Final</li>
+    </ul>
+  </div>
+
+  <div id="content">
+    <!-- Generar fases 1 a 13 -->
+    <script>
+      const nombres = [
+        "Iglesia","Plaza","Palacio","Colegio","Parque",
+        "Patio","Porche","Cocina","Baño 1",
+        "Habitación","Baño 2","Pasillo","Final"
+      ];
+      for (let i = 1; i <= 13; i++) {
+        document.write(`
+        <div id="fase${i}" class="fase ${i === 1 ? 'active' : ''}">
+          <h2>Fase ${i}: ${nombres[i - 1]}</h2>
+          <textarea placeholder="Escribe aquí la descripción de la fase..." data-fase="fase${i}"></textarea>
+          <input type="file" class="upload" multiple>
+          <div class="archivos"></div>
+        </div>`);
+      }
+    </script>
+
+    <div id="mapa">
+      <h2>Mapa simplificado de Cigales</h2>
+      <p>Utiliza el PNG externo o el SVG que te proporcioné por separado.</p>
+    </div>
+  </div>
+
+  <script>
+    function showPhase(id) {
+      document.querySelectorAll('.fase').forEach(f => f.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('textarea').forEach(area => {
+        const fase = area.dataset.fase;
+        area.value = localStorage.getItem(fase + '_texto') || '';
+        area.addEventListener('input', () => {
+          localStorage.setItem(fase + '_texto', area.value);
+        });
+      });
+
+      document.querySelectorAll('.upload').forEach(input => {
+        input.addEventListener('change', function() {
+          const fase = this.parentElement.id;
+          const archivosGuardados = JSON.parse(localStorage.getItem(fase + '_archivos') || '[]');
+          for (let file of this.files) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              archivosGuardados.push({ nombre: file.name, data: e.target.result });
+              localStorage.setItem(fase + '_archivos', JSON.stringify(archivosGuardados));
+              mostrarArchivos(fase);
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      });
+
+      document.querySelectorAll('.fase').forEach(faseDiv => {
+        mostrarArchivos(faseDiv.id);
+      });
+    });
+
+    function mostrarArchivos(fase) {
+      const data = localStorage.getItem(fase + '_archivos');
+      const fileList = document.querySelector('#' + fase + ' .archivos');
+      fileList.innerHTML = '';
+      if (data) {
+        const archivos = JSON.parse(data);
+        archivos.forEach(f => {
+          const div = document.createElement('div');
+          div.classList.add('archivo-item');
+          const link = document.createElement('a');
+          link.href = f.data;
+          link.download = f.nombre;
+          link.textContent = f.nombre;
+          link.classList.add('download-link');
+          div.appendChild(link);
+          fileList.appendChild(div);
+        });
+      }
+    }
+  </script>
+</body>
