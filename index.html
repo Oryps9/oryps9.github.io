@@ -2,134 +2,61 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Scorched Cranberries Association for the Investigation of Legally Evaded Cases</title>
+  <title>Audios Escape Room</title>
   <style>
-    body { margin: 0; font-family: Arial, sans-serif; background-color: #111; color: #eee; display: flex; }
-    #sidebar { width: 260px; background-color: #000; padding: 20px; height: 100vh; position: fixed; left: 0; top: 0; overflow-y: auto; }
-    #sidebar h2 { color: #e63946; text-align: center; font-size: 16px; }
-    #sidebar ul { list-style: none; padding: 0; }
-    #sidebar li { margin: 10px 0; cursor: pointer; color: #ccc; }
-    #sidebar li:hover { color: #fff; }
-    #content { margin-left: 280px; padding: 20px; flex: 1; }
-    .fase { display: none; }
-    .fase.active { display: block; }
-    .upload { margin-top: 10px; }
-    .descripcion { width: 100%; background: #222; color: #eee; border: 1px solid #444; padding: 10px; margin-top: 10px; min-height: 100px; white-space: pre-wrap; }
-    .archivo-item { margin-top: 5px; background: #222; padding: 5px; border-radius: 4px; }
-    a.download-link { color: #6cf; text-decoration: none; }
-    #mapa { margin-top: 30px; background: #222; padding: 20px; border-radius: 8px; text-align: center; }
-    svg { max-width: 100%; height: auto; }
-    .map-point { fill: #e63946; cursor: pointer; }
-    .map-label { fill: #eee; font-size: 12px; text-anchor: middle; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #eee;
+      padding: 20px;
+    }
+    .audio-item {
+      background: #222;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px #000;
+    }
+    button {
+      background: #e63946;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #d62828;
+    }
+    textarea {
+      width: 100%;
+      margin-top: 10px;
+      background: #333;
+      color: #eee;
+      border: none;
+      padding: 10px;
+      resize: none;
+    }
   </style>
 </head>
 <body>
-  <div id="sidebar">
-    <h2>Scorched Cranberries Association for the Investigation of Legally Evaded Cases</h2>
-    <ul>
-      <li onclick="showPhase('fase1')">Fase 1: Iglesia</li>
-      <li onclick="showPhase('fase2')">Fase 2: Plaza</li>
-      <li onclick="showPhase('fase3')">Fase 3: Palacio</li>
-      <li onclick="showPhase('fase4')">Fase 4: Colegio</li>
-      <li onclick="showPhase('fase5')">Fase 5: Parque</li>
-      <li onclick="showPhase('fase6')">Fase 6: Patio</li>
-      <li onclick="showPhase('fase7')">Fase 7: Porche</li>
-      <li onclick="showPhase('fase8')">Fase 8: Cocina</li>
-      <li onclick="showPhase('fase9')">Fase 9: Baño 1</li>
-      <li onclick="showPhase('fase10')">Fase 10: Habitación</li>
-      <li onclick="showPhase('fase11')">Fase 11: Baño 2</li>
-      <li onclick="showPhase('fase12')">Fase 12: Pasillo</li>
-      <li onclick="showPhase('fase13')">Fase 13: Final</li>
-    </ul>
+  <h1>Audios del Escape Room</h1>
+
+  <!-- Ejemplo de audio con descripción -->
+  <div class="audio-item">
+    <button onclick="document.getElementById('audio1').play()">▶️ Reproducir Audio 1</button>
+    <audio id="audio1" src="Main_hall_intro.wav"></audio>
+    <textarea readonly>Descripción o pista del Audio 1</textarea>
   </div>
 
-  <div id="content">
-    <script>
-      const nombres = [
-        "Iglesia","Plaza","Palacio","Colegio","Parque",
-        "Patio","Porche","Cocina","Baño 1",
-        "Habitación","Baño 2","Pasillo","Final"
-      ];
-      const descripciones = [
-        `Bienvenido a la Iglesia. Aquí comienza tu aventura. Carta:\nAcertijo: Oscuridad, órganos, almas, cuerpos; muertos... Casi parece un holocausto... Y aun así; es todo lo contrario. ¿Qué es? Donde su creador yace eternamente habrás de comenzar tu búsqueda.`,
-        `Llegaste a la Plaza. Observa bien a tu alrededor. Dos calles en la esquina izquierda de esta plaza son vuestras opciones. Elegid bien, pues el camino de la mitra será el camino de luz. Tras ello, en un palacio encontraréis vuestra siguiente pista. (P. D.: Nadie ha dicho que el palacio parezca un palacio.)`,
-        `El Palacio guarda secretos antiguos. '[...] al lado de un tipo de la misma _________ que al que habéis "usurpado un código QR".'\n\n¿A dónde tendréis que ir...?`,
-        `¡Oh! ¡Aquella tan aclamada técnica con la que retratan con tanta belleza los pintores a sus modelos! ¿Cómo se llamaba?`,
-        `La puerta.`,
-        `La sala de invitados está vacía pero escucha sonidos extraños.`,
-        `El Porche es estrecho y oscuro.`,
-        `Cocina una pizza. Letra 1 y hacha. Receta. Y UV en el horno.`,
-        `Baño 1, cuidado con lo que encuentres.`,
-        `Habitación con muebles antiguos y pistas ocultas.`,
-        `Baño 2, no hay nadie pero algo llama tu atención.`,
-        `Que no te atrape la marioneta.`,
-        `Final: ¿Amigo?`
-      ];
-      for (let i = 1; i <= 13; i++) {
-        document.write(`
-        <div id="fase${i}" class="fase ${i === 1 ? 'active' : ''}">
-          <h2>Fase ${i}: ${nombres[i - 1]}</h2>
-          <div class="descripcion">${descripciones[i-1]}</div>
-          <input type="file" class="upload" multiple>
-          <div class="archivos"></div>
-        </div>`);
-      }
-    </script>
-
-    <div id="mapa">
-      <h2>Mapa simplificado de Cigales</h2>
-      <p>Utiliza el PNG externo o el SVG que te proporcioné por separado.</p>
-    </div>
+  <!-- Para añadir más audios, copia este bloque y cambia el id, el src y el texto -->
+  <!--
+  <div class="audio-item">
+    <button onclick="document.getElementById('audio2').play()">▶️ Reproducir Audio 2</button>
+    <audio id="audio2" src="NOMBRE_DEL_AUDIO.wav"></audio>
+    <textarea readonly>Descripción o pista del Audio 2</textarea>
   </div>
+  -->
 
-  <script>
-    function showPhase(id) {
-      document.querySelectorAll('.fase').forEach(f => f.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.upload').forEach(input => {
-        input.addEventListener('change', function() {
-          const fase = this.parentElement.id;
-          const archivosGuardados = JSON.parse(localStorage.getItem(fase + '_archivos') || '[]');
-          for (let file of this.files) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-              archivosGuardados.push({ nombre: file.name, data: e.target.result });
-              localStorage.setItem(fase + '_archivos', JSON.stringify(archivosGuardados));
-              mostrarArchivos(fase);
-            };
-            reader.readAsDataURL(file);
-          }
-        });
-      });
-
-      document.querySelectorAll('.fase').forEach(faseDiv => {
-        mostrarArchivos(faseDiv.id);
-      });
-    });
-
-    function mostrarArchivos(fase) {
-      const data = localStorage.getItem(fase + '_archivos');
-      const fileList = document.querySelector('#' + fase + ' .archivos');
-      fileList.innerHTML = '';
-      if (data) {
-        const archivos = JSON.parse(data);
-        archivos.forEach(f => {
-          const div = document.createElement('div');
-          div.classList.add('archivo-item');
-          const link = document.createElement('a');
-          link.href = f.data;
-          link.download = f.nombre;
-          link.textContent = f.nombre;
-          link.classList.add('download-link');
-          div.appendChild(link);
-          fileList.appendChild(div);
-        });
-      }
-    }
-  </script>
 </body>
 </html>
-
