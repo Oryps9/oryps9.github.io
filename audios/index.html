@@ -173,7 +173,7 @@
 <div class="audio-item">
   <button onclick="document.getElementById('audio21').play()">▶️ Tras tocar la partitura</button>
   <audio id="audio21" src="Clave.mp3"></audio>
-  <textarea readonly>Ahora tienen que mirar entre las partituras y confirmar que la última letra es alfa porque la pieza está en a minor (la menor). Se les tiene que oír decirlo.</textarea>
+  <textarea readonly>Ahora tienen que mirar entre las partituras y confirmar que la última letra es alfa porque la pieza está en "a minor" (la menor). Se les tiene que oír decirlo.</textarea>
 </div>
 
 <div class="audio-item">
@@ -236,6 +236,17 @@
   <textarea readonly>Al acabar, cerrar stream y entrar unos instantes más tarde.</textarea>
 </div>
 
+  <script>
+const pauseButtons = document.querySelectorAll('.pause-btn');
+
+pauseButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const audioId = btn.dataset.audio;
+    const audio = document.getElementById(audioId);
+    audio.pause();
+  });
+});
+</script>
 
   <!-- Para añadir más audios, copia este bloque y cambia el id, el src y el texto -->
   <!--
