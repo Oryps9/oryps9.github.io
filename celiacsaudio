@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Audios Escape Room</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #eee;
+      padding: 20px;
+    }
+    .audio-item {
+      background: #222;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px #000;
+    }
+    button {
+      background: #e63946;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #d62828;
+    }
+    textarea {
+      width: 100%;
+      margin-top: 10px;
+      background: #333;
+      color: #eee;
+      border: none;
+      padding: 10px;
+      resize: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Audios del Escape Room</h1>
+
+  <!-- Ejemplo de audio con descripción -->
+  <div class="audio-item">
+    <button onclick="document.getElementById('audio1').play()">▶️ Reproducir Audio 1</button>
+    <audio id="audio1" src="Main_hall_intro.wav"></audio>
+    <textarea readonly>Descripción o pista del Audio 1</textarea>
+  </div>
+
+  <!-- Para añadir más audios, copia este bloque y cambia el id, el src y el texto -->
+  <!--
+  <div class="audio-item">
+    <button onclick="document.getElementById('audio2').play()">▶️ Reproducir Audio 2</button>
+    <audio id="audio2" src="NOMBRE_DEL_AUDIO.wav"></audio>
+    <textarea readonly>Descripción o pista del Audio 2</textarea>
+  </div>
+  -->
+
+</body>
+</html>
