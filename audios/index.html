@@ -44,21 +44,27 @@
 
   <!-- Ejemplo de audio con descripción -->
 <div class="audio-item">
-  <button onclick="document.getElementById('audio1').play()">▶️ Al entrar al canal de twitch (pasillo principal)</button>
-  <audio id="audio1" src="Main_hall_intro.wav"></audio>
+  <button onclick="document.getElementById('audio1').play()">▶️ Al entrar al canal de Twitch (patio)</button>
+  <audio id="audio1" src="Patio_intro.wav"></audio>
   <textarea readonly></textarea>
 </div>
 
+  <div class="audio-item">
+  <button onclick="document.getElementById('Luces').play()">▶️ Cuando acaben el otro audio. </button>
+  <audio id="Luces" src="Luces.mp3"></audio>
+  <textarea readonly>AVISAR A MARIONETA DE QUE ESPERE A LA PUERTA</textarea>
+</div>
+  
 <div class="audio-item">
-  <button onclick="document.getElementById('audio2').play()">▶️ Al entrar en la sala de invitados y mirar un poco</button>
-  <audio id="audio2" src="Invitados_Asis.mp3"></audio>
-  <textarea readonly>AVISAR A MARIONETA DE QUE ESPERE A LA PUERTA > Reproducir música después de que la asistente diga "SE HA DETECADO UNA ANOMALÍA" > AVISAR A MARIONETA QUE ENTRE.</textarea>
+  <button onclick="document.getElementById('audio2').play()">▶️ Cuando Enciendan las luces </button>
+  <audio id="audio2" src="Invitados_AsisP.mp3"></audio>
+  <textarea readonly> > Reproducir música después de que la asistente diga "SE HA DETECADO UNA ANOMALÍA" > AVISAR A MARIONETA QUE ENTRE en cuanto estén escondidos.</textarea>
 </div>
 
   <div class="audio-item">
-  <button onclick="document.getElementById('music1').play()">▶️ !!!! Música para cuando venga la marioneta en la sala de invitados y se escondan</button>
+  <button onclick="document.getElementById('music1').play()">▶️ !!!! Música para cuando venga la marioneta y se escondan</button>
   <audio id="music1" src="Hideout.ogg"></audio>
-  <textarea readonly>Reproducir mientras la marioneta busca en la sala</textarea>
+  <textarea readonly>Reproducir mientras la marioneta busca en el patio</textarea>
 </div>
 
 <div class="audio-item">
@@ -70,7 +76,7 @@
 <div class="audio-item">
   <button onclick="document.getElementById('audio4').play()">▶️ Al llegar a cocina</button>
   <audio id="audio4" src="Cocina_presentadora.mp3"></audio>
-  <textarea readonly></textarea>
+  <textarea readonly>AVISAR A MARIONETA DE QUE CIERRE LA PUERTA CUANDO TERMINEN DE ESCUCHAR EL AUDIO Y ESTÉN HACIENDO LA PIZZA</textarea>
 </div>
 
 <div class="audio-item">
@@ -197,7 +203,7 @@
 <div class="audio-item">
   <button onclick="document.getElementById('audio25').play()">▶️ Justo cuando acabe el anterior</button>
   <audio id="audio25" src="Puerta3.wav"></audio>
-  <textarea readonly>!!!! AVISAR A MARIONETA PARA QUE ENTRE</textarea>
+  <textarea readonly>!!!! AVISAR A MARIONETA PARA QUE ENTRE CUANDO DIGA "CORRIENTES ELÉCTRICAS"</textarea>
 </div>
 
     <div class="audio-item">
